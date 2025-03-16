@@ -1,0 +1,13 @@
+/* Custom styles for CV entries */
+.cv-entry {
+  margin-bottom: 1.5em;  // Space between entries
+  
+  ul {
+    margin-top: 0.1em;   // Minimal space between title and bullet points
+    margin-bottom: 0;    // Remove bottom margin from lists
+  }
+  
+  li {
+    margin-bottom: 0.2em; // Slight space between bullet points
+  }
+} 

@@ -9,37 +9,46 @@ redirect_from:
 
 {% include base_path %}
 
+You can download my full CV [here](/files/CV.pdf).
+
 Education
 ======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in GitHub, GitHub University, 2012
 
-Work experience
+### PhD candidate in AI Safety @ CISPA Helmholtz Center for Information Security *(Jun. 2024 - present)*
+* Researching LLM Alignment and Interpretability advised by Prof. Mario Fritz
+* coadvised by Prof. David Krueger at MILA as part of the ELLIS PhD program
+
+### MSc. Computer Science - AI Technology Track @ University of Technology Delft *(Sep. 2021 - Nov. 2023)*
+* Thesis: Counterfactual Explanations of Learned Reward Functions
+* Grade: 8.5/10
+
+### BSc. Business Informatics @ Otto-Friedrich-University Bamberg *(Apr. 2017 - May 2021)*
+* Thesis: Efficient inference of qualitative temporal information for robust planning
+* Grade: 1.2 (cum laude)
+
+Research experience
 ======
-* Spring 2024: Academic Pages Collaborator
-  * GitHub University
-  * Duties includes: Updates and improvements to template
-  * Supervisor: The Users
+### Participant @ AI Safety Camp *(Jan. 2024 - Mai 2024)*
+* Conducted and published research to characterize and prevent harmful fine-tuning attacks
 
-* Fall 2015: Research Assistant
-  * GitHub University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+### Research Fellow @ Swiss Existential Risk Initative *(Jul. 2022 - Aug. 2022)*
+* Employed interdisciplinary thinking to identify data requirements for Inverse Reinforcement Learning to learn human values
+* Experimentally validated theoretical shortcomings and technical challenges for Reward Learning
 
-* Summer 2015: Research Assistant
-  * GitHub University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
-  
-Skills
+### Research Assistant @ Otto-Friedrich-University Bamberg *(Jun. 2021 - Aug. 2021)*
+* Conducted empirical research on knowledge representation in temporal domains
+
+Teaching and Organising Experience
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
+### Founder @ Delft AI Safety Initiative *(Nov. 2022 - Dec. 2023)*
+* Devised strategy and structure for a new student organisation focused on addressing risks from AI
+* Delivered courses and regular events on AI Alignment to >50 students
+* Presented introductory talks about research in AI Safety
+
+### Teaching Assistant - Algorithms and Data Structures @ Otto-Friedrich-University Bamberg *(Apr. 2019&2021 - Aug. 2019&2021)*
+* Held weekly classes and discussions explaining key concepts in Computer Science
+* Graded assignments and providing feedback
+
 
 Publications
 ======
@@ -47,18 +56,3 @@ Publications
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   
-Talks
-======
-  <ul>{% for post in site.talks reversed %}
-    {% include archive-single-talk-cv.html  %}
-  {% endfor %}</ul>
-  
-Teaching
-======
-  <ul>{% for post in site.teaching reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Service and leadership
-======
-* Currently signed in to 43 different slack teams

@@ -8,11 +8,14 @@
    sorted by the dependencies. Also, the first two lines of the file are required by Jekyll.
  */
 
+@charset "utf-8";
+
 @import 
     "vendor/breakpoint/breakpoint",
 
     "themes",
     "theme/{{ site.site_theme | default: 'default' }}",
+    "custom",
 
     "include/mixins",
     "vendor/susy/susy",
@@ -38,5 +41,4 @@
     "vendor/font-awesome/fontawesome",
     "vendor/font-awesome/solid",
     "vendor/font-awesome/brands",
-    "vendor/magnific-popup/magnific-popup"
-;
+    "vendor/magnific-popup/magnific-popup";

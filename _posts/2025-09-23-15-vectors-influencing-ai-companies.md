@@ -24,40 +24,40 @@ Limitations: This analysis doesn’t go in depth on any vector and doesn’t ana
 <td style="font-size: 1.1em; font-weight: bold; padding: 8px;"><strong><a href="#direct-work">Direct Work</a></strong></td>
 <td style="font-size: 1.1em; font-weight: bold; padding: 8px;"><strong>Work inside or make direct contributions from the outside</strong></td>
 </tr>
-<tr><td><a href="#join-them">Join them</a></td><td>Build and influence things inside the company</td></tr>
-<tr><td><a href="#build-something-for-them">Build something for them</a></td><td>Create things they can use</td></tr>
-<tr><td><a href="#collaborate-with-them">Collaborate with them</a></td><td>Partner with them</td></tr>
+<tr><td><a href="#1-join-them">Join them</a></td><td>Build and influence things inside the company</td></tr>
+<tr><td><a href="#2-build-something-for-them">Build something for them</a></td><td>Create things they can use</td></tr>
+<tr><td><a href="#3-collaborate-with-them">Collaborate with them</a></td><td>Partner with them</td></tr>
 <tr style="background-color: #f0f0f0;">
 <td style="font-size: 1.1em; font-weight: bold; padding: 8px;"><strong><a href="#governance">Governance</a></strong></td>
 <td style="font-size: 1.1em; font-weight: bold; padding: 8px;"><strong>Legal and regulatory power</strong></td>
 </tr>
-<tr><td><a href="#regulate-them">Regulate them</a></td><td>Pass laws that force compliance</td></tr>
-<tr><td><a href="#sue-them">Sue them</a></td><td>Litigation for transparency and behaviour change</td></tr>
-<tr><td><a href="#set-standards-for-them">Set standards for them</a></td><td>Industry norms that become requirements</td></tr>
+<tr><td><a href="#4-regulate-them">Regulate them</a></td><td>Pass laws that force compliance</td></tr>
+<tr><td><a href="#5-sue-them">Sue them</a></td><td>Litigation for transparency and behaviour change</td></tr>
+<tr><td><a href="#6-set-standards-for-them">Set standards for them</a></td><td>Industry norms that become requirements</td></tr>
 <tr style="background-color: #f0f0f0;">
 <td style="font-size: 1.1em; font-weight: bold; padding: 8px;"><strong><a href="#improve-decisions">Improve Decisions</a></strong></td>
 <td style="font-size: 1.1em; font-weight: bold; padding: 8px;"><strong>Shape information and culture</strong></td>
 </tr>
-<tr><td><a href="#convince-them">Convince them</a></td><td>Provide evidence that changes minds</td></tr>
-<tr><td><a href="#spread-memes-to-them">Spread memes to them</a></td><td>Viral ideas that reshape thinking</td></tr>
-<tr><td><a href="#set-social-expectations-for-them">Set social expectations for them</a></td><td>Make safety prestigious, recklessness shameful</td></tr>
+<tr><td><a href="#7-convince-them">Convince them</a></td><td>Provide evidence that changes minds</td></tr>
+<tr><td><a href="#8-spread-memes-to-them">Spread memes to them</a></td><td>Viral ideas that reshape thinking</td></tr>
+<tr><td><a href="#9-setting-societal-expectations-for-them">Set social expectations for them</a></td><td>Make safety prestigious, recklessness shameful</td></tr>
 <tr style="background-color: #f0f0f0;">
 <td style="font-size: 1.1em; font-weight: bold; padding: 8px;"><strong><a href="#economic">Economic</a></strong></td>
 <td style="font-size: 1.1em; font-weight: bold; padding: 8px;"><strong>Control resources and market dynamics</strong></td>
 </tr>
-<tr><td><a href="#invest-in-them">Invest in them</a></td><td>Make investment conditional on safety</td></tr>
-<tr><td><a href="#sell-to-them">Sell to them</a></td><td>Supplier leverage (chips, compute, data)</td></tr>
-<tr><td><a href="#buy-from-them">Buy from them</a></td><td>Customer demands and procurement requirements</td></tr>
-<tr><td><a href="#shape-their-market">Shape their market</a></td><td>Competitive pressure on capabilities or safety</td></tr>
-<tr><td><a href="#change-their-talent-pipeline">Change their talent pipeline</a></td><td>Influence who they can hire</td></tr>
-<tr><td><a href="#insure-them">Insure them</a></td><td>Make insurance cost dependent on safety requirements</td></tr>
+<tr><td><a href="#10-invest-in-them">Invest in them</a></td><td>Make investment conditional on safety</td></tr>
+<tr><td><a href="#11-sell-to-them">Sell to them</a></td><td>Supplier leverage (chips, compute, data)</td></tr>
+<tr><td><a href="#12-buy-from-them">Buy from them</a></td><td>Customer demands and procurement requirements</td></tr>
+<tr><td><a href="#13-shape-their-market">Shape their market</a></td><td>Competitive pressure on capabilities or safety</td></tr>
+<tr><td><a href="#14-change-their-talent-pipeline">Change their talent pipeline</a></td><td>Influence who they can hire</td></tr>
+<tr><td><a href="#15-insure-them">Insure them</a></td><td>Make insurance cost dependent on safety requirements</td></tr>
 </table>
 
 # Direct Work
 
 ## 1. Join them
 
-*Who?* (Potential) employees
+*Who?* (Potential) employees 
 
 Working at the AI companies means you can be in the room where decisions happen. You can play internal politics, make new projects happen or just be in a decision-making position. This gives you sway over crucial decisions about compute allocation, release strategies or research priorities. You can also contribute by implementing solutions and carrying out projects that have a positive impact, for example, by being an individual contributor in a safety team. Lastly, insiders have access to sensitive information that they can leak to governments or the public if necessary. These positions are clearly very impactful as they are close to the action, but also bring risks like accelerating AI development or being corrupted by power/money/social influence (more [discussion](https://80000hours.org/career-reviews/working-at-an-ai-lab/){:target="_blank"}).
 

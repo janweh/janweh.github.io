@@ -73,7 +73,9 @@ A list of related resources:
 - If you haven't seen the movie [Her](https://www.imdb.com/title/tt1798709) you should
 
 ## **Go and reflect yourself**
-You might be left wondering how I imagine paradise, but you will have to wait for a follow-up post I intend to write. Meanwhile you should reflect for yourself how a good future looks like. I encourage you to reflect yourself (stealing from the BlueDot Course):
+You should reflect for yourself how a good future looks like. I encourage you to reflect yourself (stealing from the BlueDot Course):
 
 - Imagine a week in your life in 20 years, where you're living a good, happy life. Consider going for a short walk to reflect on this.
 - Over the next 20 years, we will welcome 2.7 billion new humans. How should the world look for them? Consider factors like politics, the economy, the social order and community, technological progress, and the environment.
+
+After answering these questions in detail I dumped the notes into Claude and [co-wrote a vision of day in 20 years](/posts/2025/01/3092045/). You can read the output here. I can highly recommend this exercise to write your own personalized, utopic sci-fi story.

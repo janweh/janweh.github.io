@@ -14,7 +14,10 @@ You can download my full CV [here](/files/CV.pdf).
 Education
 ======
 
-### PhD candidate in AI Safety @ CISPA Helmholtz Center for Information Security *(Jun. 2024 - present)*
+### Winter Fellow in AI Governance @ Center for the Governance of AI *(Jan. 2026 - Apr. 2026)
+* Conducting research on AI Governance under mentorship of Alan Chan
+
+### PhD candidate in AI Safety @ CISPA Helmholtz Center for Information Security *(Jun. 2024 - Oct. 2025)*
 * Researching LLM Alignment and Interpretability advised by Prof. Mario Fritz
 * coadvised by Prof. David Krueger at MILA as part of the ELLIS PhD program
 

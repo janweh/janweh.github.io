@@ -23,14 +23,14 @@ repository               : "janweh/janweh.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "face.jpeg"
+  avatar           : "face.jpg"
   name             : "Jan Wehner"
   pronouns         : # example: "she/her"  
-  bio              : "PhD Student in AI Safety"
-  location         : "Saarbrücken, Germany"
-  employer         : "CISPA Helmholtz Center<br>for Information Security"
+  bio              : "AI Governance Winter Fellow"
+  location         : "London, UK"
+  employer         : "GovAI"
   uri              : # URL
-  email            : "jan.wehner@cispa.de" 
+  email            : "janwehner1@t-online.de" 
 
   # Academic websites
   arxiv            : # URL - Update with the correct link to your profile
@@ -60,7 +60,7 @@ author:
   keybase          : # Username
   instagram        : # Username
   lastfm           : # Username
-  linkedin         : # Username
+  linkedin         : "jan-wehner-811682216"
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username

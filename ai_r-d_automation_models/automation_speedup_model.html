@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Automation Speedup Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #0f0f0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .sidebar {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+            height: fit-content;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .chart-container {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .area-group {
+            margin-bottom: 15px;
+        }
+        .area-group-title {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .checkbox-item input {
+            margin-right: 8px;
+            accent-color: var(--area-color, #4CAF50);
+        }
+        .checkbox-item label {
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .color-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+            display: inline-block;
+        }
+        .slider-group {
+            margin-bottom: 12px;
+        }
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .slider-label span:first-child {
+            color: #ccc;
+        }
+        .slider-label span:last-child {
+            color: #4CAF50;
+            font-weight: 500;
+        }
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #4CAF50;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .factor-section {
+            border-top: 1px solid #333;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+        .factor-grid {
+            display: grid;
+            gap: 8px;
+        }
+        .factor-row {
+            display: grid;
+            grid-template-columns: 1fr 50px 60px;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+        }
+        .factor-row label {
+            color: #aaa;
+        }
+        .factor-row input[type="number"] {
+            width: 100%;
+            padding: 4px 6px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 11px;
+            text-align: center;
+        }
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        .tab {
+            flex: 1;
+            padding: 8px 12px;
+            background: #2a2a2a;
+            border: none;
+            border-radius: 6px;
+            color: #888;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        .tab.active {
+            background: #4CAF50;
+            color: #fff;
+        }
+        .tab:hover:not(.active) {
+            background: #333;
+        }
+        .info-box {
+            background: #252525;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        .info-box strong {
+            color: #4CAF50;
+        }
+        .metr-params {
+            background: #1f2937;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        .reset-btn {
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+        .reset-btn:hover {
+            background: #444;
+        }
+        .legend-custom {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #252525;
+            border-radius: 8px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 11px;
+        }
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .stat-card {
+            background: #252525;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: #888;
+            margin-top: 4px;
+        }
+        .collapsible {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .collapsible::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.2s;
+        }
+        .collapsible.collapsed::after {
+            transform: rotate(-90deg);
+        }
+        .collapsible-content {
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .collapsible-content.collapsed {
+            max-height: 0;
+        }
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Automation Speedup Model</h1>
+    <p class="subtitle">Forecasting when different ML research areas will experience speedups from AI automation</p>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="section">
+                <div class="section-title collapsible" onclick="toggleSection(this)">Research Areas</div>
+                <div class="collapsible-content">
+                    <div class="area-group">
+                        <div class="area-group-title">🛡️ AI Safety</div>
+                        <div id="safety-areas"></div>
+                    </div>
+                    <div class="area-group">
+                        <div class="area-group-title">⚡ Capabilities</div>
+                        <div id="capabilities-areas"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title collapsible" onclick="toggleSection(this)">METR Task Horizon Trend</div>
+                <div class="collapsible-content">
+                    <div class="metr-params">
+                        <div class="slider-group">
+                            <div class="slider-label">
+                                <span>Doubling time (months)</span>
+                                <span id="doubling-value">5.5</span>
+                            </div>
+                            <input type="range" id="doubling-time" min="2" max="12" step="0.5" value="5.5" oninput="updateModel()">
+                        </div>
+                        <div class="slider-group">
+                            <div class="slider-label">
+                                <span>Current horizon (mins, 50% success)</span>
+                                <span id="horizon-value">60</span>
+                            </div>
+                            <input type="range" id="current-horizon" min="30" max="180" step="5" value="60" oninput="updateModel()">
+                        </div>
+                        <div class="info-box">
+                            <strong>METR data:</strong> Task horizons doubled every ~7 months (2019-2025), accelerating to ~4 months in 2024-2025. Current best: ~173 min at 50% success.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title collapsible" onclick="toggleSection(this)">Factor Weights</div>
+                <div class="collapsible-content">
+                    <div class="factor-grid" id="weights-container"></div>
+                </div>
+            </div>
+
+            <div class="section factor-section">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchFactorTab('all')">All Factors</button>
+                    <button class="tab" onclick="switchFactorTab('safety')">Safety</button>
+                    <button class="tab" onclick="switchFactorTab('caps')">Capabilities</button>
+                </div>
+                <div class="section-title collapsible collapsed" onclick="toggleSection(this)">Edit Factor Scores</div>
+                <div class="collapsible-content collapsed" id="factors-container"></div>
+            </div>
+
+            <button class="reset-btn" onclick="resetToDefaults()">Reset to Defaults</button>
+        </div>
+
+        <div class="chart-container">
+            <div class="summary-stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="safety-10x">--</div>
+                    <div class="stat-label">Safety avg 10x speedup</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="caps-10x">--</div>
+                    <div class="stat-label">Capabilities avg 10x speedup</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="gap">--</div>
+                    <div class="stat-label">Gap (months)</div>
+                </div>
+            </div>
+            <canvas id="speedupChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Research areas data from the document
+        const defaultData = {
+            areas: {
+                // Safety areas
+                'Interpretability': { category: 'safety', color: '#22c55e' },
+                'Alignment Theory': { category: 'safety', color: '#16a34a' },
+                'Scalable Oversight': { category: 'safety', color: '#15803d' },
+                'AI Control': { category: 'safety', color: '#4ade80' },
+                'DC Evals': { category: 'safety', color: '#86efac' },
+                // Capabilities areas
+                'Pre-training Alg. Improvements': { category: 'capabilities', color: '#f97316' },
+                'Post-training': { category: 'capabilities', color: '#fb923c' },
+                'Data Generation': { category: 'capabilities', color: '#fdba74' },
+                'Agent Scaffolding': { category: 'capabilities', color: '#ea580c' },
+                'Training Efficiency': { category: 'capabilities', color: '#c2410c' }
+            },
+            factors: ['Task Length', 'Insight/Creativity', 'Data Availability', 'Feedback Quality', 'Compute vs Labour', 'Scheming Risk', 'Economic Incentive'],
+            weights: {
+                'Task Length': 1.0,
+                'Insight/Creativity': 1.5,
+                'Data Availability': 0.2,
+                'Feedback Quality': 2.5,
+                'Compute vs Labour': 2.5,
+                'Scheming Risk': 0.4,
+                'Economic Incentive': 0.5
+            },
+            scores: {
+                'Interpretability': [7.62, 4.56, 4.88, 3.88, 7.88, 2.00, 3.88],
+                'Alignment Theory': [2.12, 1.50, 3.00, 1.38, 10.00, 1.00, 1.88],
+                'Scalable Oversight': [4.00, 5.00, 2.25, 3.88, 6.75, 1.00, 4.00],
+                'AI Control': [6.25, 6.06, 2.00, 4.38, 8.12, 1.00, 4.62],
+                'DC Evals': [7.62, 7.56, 4.12, 3.62, 7.62, 1.00, 5.38],
+                'Pre-training Alg. Improvements': [3.12, 6.12, 7.75, 7.50, 2.12, 9.00, 9.38],
+                'Post-training': [5.00, 6.75, 7.00, 7.38, 4.38, 7.00, 9.38],
+                'Data Generation': [6.12, 8.86, 6.38, 6.00, 3.88, 9.00, 9.00],
+                'Agent Scaffolding': [7.50, 7.50, 5.88, 7.50, 6.62, 9.00, 8.75],
+                'Training Efficiency': [6.12, 6.23, 7.00, 9.12, 5.25, 9.00, 9.12]
+            },
+            // Task length mapping: score -> typical task duration in minutes
+            // Score 1 = very long tasks (~8 hours), Score 10 = very short tasks (~5 min)
+            taskLengthMap: {
+                1: 480, 2: 360, 3: 240, 4: 180, 5: 120,
+                6: 90, 7: 60, 8: 45, 9: 30, 10: 15
+            }
+        };
+
+        let currentData = JSON.parse(JSON.stringify(defaultData));
+        let activeAreas = Object.keys(currentData.areas);
+        let factorTabFilter = 'all';
+        let chart = null;
+
+        // METR parameters
+        let metrParams = {
+            doublingMonths: 5.5,  // Average of 4 and 7 months
+            currentHorizonMins: 60  // Current ~1 hour at 50% success
+        };
+
+        function toggleSection(el) {
+            el.classList.toggle('collapsed');
+            el.nextElementSibling.classList.toggle('collapsed');
+        }
+
+        function interpolateTaskLength(score) {
+            const floor = Math.floor(score);
+            const ceil = Math.ceil(score);
+            if (floor === ceil) return currentData.taskLengthMap[floor];
+            const t = score - floor;
+            return currentData.taskLengthMap[floor] * (1 - t) + currentData.taskLengthMap[ceil] * t;
+        }
+
+        function calculateWeightedScore(area) {
+            const scores = currentData.scores[area];
+            const factors = currentData.factors;
+            let weightedSum = 0;
+            let totalWeight = 0;
+
+            for (let i = 0; i < factors.length; i++) {
+                const weight = currentData.weights[factors[i]];
+                weightedSum += scores[i] * weight;
+                totalWeight += weight;
+            }
+
+            return weightedSum / totalWeight;
+        }
+
+        function calculateSpeedupCurve(area, months) {
+            // Get the area's typical task length from Task Length score
+            const taskLengthScore = currentData.scores[area][0];
+            const typicalTaskMins = interpolateTaskLength(taskLengthScore);
+
+            // Get other factors that affect automation rate
+            const automationScore = calculateWeightedScore(area);
+
+            // Calculate when this area reaches different automation levels
+            // Based on METR: AI horizon doubles every doublingMonths
+            // When horizon reaches task length, ~50% automation possible
+
+            const speedups = [];
+            const currentHorizon = metrParams.currentHorizonMins;
+            const doublingTime = metrParams.doublingMonths;
+
+            for (let m = 0; m <= months; m++) {
+                // Calculate AI horizon at month m (exponential growth)
+                const futureHorizon = currentHorizon * Math.pow(2, m / doublingTime);
+
+                // Calculate what fraction of tasks can be automated
+                // Sigmoid based on ratio of horizon to typical task length
+                const ratio = futureHorizon / typicalTaskMins;
+
+                // Sigmoid function: automation fraction
+                // Modified by other factors (automationScore)
+                const baseFraction = 1 / (1 + Math.exp(-2 * (Math.log2(ratio))));
+
+                // Adjust by automation amenability (score 1-10 -> 0.3-1.0 multiplier)
+                const amenabilityMult = 0.3 + (automationScore / 10) * 0.7;
+
+                // Compute vs labour factor: high score means labour-bottlenecked
+                // = more benefit from automation
+                const computeLabourScore = currentData.scores[area][4];
+                const labourMult = 0.5 + (computeLabourScore / 10) * 0.5;
+
+                // Final automation fraction
+                const automationFraction = Math.min(1, baseFraction * amenabilityMult);
+
+                // Convert to speedup factor
+                // Speedup = 1 / (1 - automation_fraction * labour_contribution)
+                // Where labour_contribution depends on how labour-bottlenecked the field is
+                const labourContribution = labourMult;
+                const effectiveAutomation = automationFraction * labourContribution;
+
+                // Speedup formula: if 50% of work is automated, you get 2x speedup
+                // if 90% automated, you get 10x speedup
+                const speedup = 1 / (1 - Math.min(0.95, effectiveAutomation));
+
+                speedups.push(Math.min(speedup, 30)); // Cap at 30x
+            }
+
+            return speedups;
+        }
+
+        function getMonthsTo10x(area) {
+            for (let m = 0; m <= 120; m++) {
+                const curve = calculateSpeedupCurve(area, m);
+                if (curve[m] >= 10) return m;
+            }
+            return '>10y';
+        }
+
+        function initUI() {
+            // Generate area checkboxes
+            const safetyContainer = document.getElementById('safety-areas');
+            const capsContainer = document.getElementById('capabilities-areas');
+
+            Object.entries(currentData.areas).forEach(([name, info]) => {
+                const container = info.category === 'safety' ? safetyContainer : capsContainer;
+                const div = document.createElement('div');
+                div.className = 'checkbox-item';
+                div.innerHTML = `
+                    <input type="checkbox" id="area-${name}" checked onchange="toggleArea('${name}')">
+                    <span class="color-dot" style="background: ${info.color}"></span>
+                    <label for="area-${name}">${name}</label>
+                `;
+                container.appendChild(div);
+            });
+
+            // Generate weight sliders
+            const weightsContainer = document.getElementById('weights-container');
+            currentData.factors.forEach(factor => {
+                const div = document.createElement('div');
+                div.className = 'slider-group';
+                div.innerHTML = `
+                    <div class="slider-label">
+                        <span>${factor}</span>
+                        <span id="weight-${factor.replace(/\//g, '-')}">${currentData.weights[factor]}</span>
+                    </div>
+                    <input type="range" min="0" max="5" step="0.1" value="${currentData.weights[factor]}"
+                           oninput="updateWeight('${factor}', this.value)">
+                `;
+                weightsContainer.appendChild(div);
+            });
+
+            // Generate factor score inputs
+            updateFactorInputs();
+        }
+
+        function updateFactorInputs() {
+            const container = document.getElementById('factors-container');
+            container.innerHTML = '';
+
+            const areasToShow = Object.entries(currentData.areas)
+                .filter(([name, info]) => {
+                    if (factorTabFilter === 'all') return true;
+                    if (factorTabFilter === 'safety') return info.category === 'safety';
+                    return info.category === 'capabilities';
+                })
+                .map(([name]) => name);
+
+            areasToShow.forEach(area => {
+                const areaDiv = document.createElement('div');
+                areaDiv.style.marginBottom = '15px';
+                areaDiv.innerHTML = `<div style="font-size: 12px; font-weight: 600; color: ${currentData.areas[area].color}; margin-bottom: 8px;">${area}</div>`;
+
+                const grid = document.createElement('div');
+                grid.className = 'factor-grid';
+
+                currentData.factors.forEach((factor, i) => {
+                    const row = document.createElement('div');
+                    row.className = 'factor-row';
+                    row.innerHTML = `
+                        <label>${factor}</label>
+                        <input type="number" min="0" max="10" step="0.1" value="${currentData.scores[area][i]}"
+                               onchange="updateScore('${area}', ${i}, this.value)">
+                        <span style="color: #666; font-size: 10px;">/ 10</span>
+                    `;
+                    grid.appendChild(row);
+                });
+
+                areaDiv.appendChild(grid);
+                container.appendChild(areaDiv);
+            });
+        }
+
+        function switchFactorTab(tab) {
+            factorTabFilter = tab;
+            document.querySelectorAll('.tabs .tab').forEach((el, i) => {
+                el.classList.toggle('active',
+                    (tab === 'all' && i === 0) ||
+                    (tab === 'safety' && i === 1) ||
+                    (tab === 'caps' && i === 2)
+                );
+            });
+            updateFactorInputs();
+        }
+
+        function toggleArea(name) {
+            const checkbox = document.getElementById(`area-${name}`);
+            if (checkbox.checked) {
+                activeAreas.push(name);
+            } else {
+                activeAreas = activeAreas.filter(a => a !== name);
+            }
+            updateModel();
+        }
+
+        function updateWeight(factor, value) {
+            currentData.weights[factor] = parseFloat(value);
+            document.getElementById(`weight-${factor.replace(/\//g, '-')}`).textContent = value;
+            updateModel();
+        }
+
+        function updateScore(area, factorIndex, value) {
+            currentData.scores[area][factorIndex] = parseFloat(value);
+            updateModel();
+        }
+
+        function updateModel() {
+            metrParams.doublingMonths = parseFloat(document.getElementById('doubling-time').value);
+            metrParams.currentHorizonMins = parseFloat(document.getElementById('current-horizon').value);
+
+            document.getElementById('doubling-value').textContent = metrParams.doublingMonths;
+            document.getElementById('horizon-value').textContent = metrParams.currentHorizonMins;
+
+            updateChart();
+            updateStats();
+        }
+
+        function updateStats() {
+            let safetyMonths = [];
+            let capsMonths = [];
+
+            Object.entries(currentData.areas).forEach(([name, info]) => {
+                const months = getMonthsTo10x(name);
+                if (typeof months === 'number') {
+                    if (info.category === 'safety') safetyMonths.push(months);
+                    else capsMonths.push(months);
+                }
+            });
+
+            const safetyAvg = safetyMonths.length ? (safetyMonths.reduce((a, b) => a + b) / safetyMonths.length) : null;
+            const capsAvg = capsMonths.length ? (capsMonths.reduce((a, b) => a + b) / capsMonths.length) : null;
+
+            document.getElementById('safety-10x').textContent = safetyAvg ? formatMonths(safetyAvg) : '--';
+            document.getElementById('caps-10x').textContent = capsAvg ? formatMonths(capsAvg) : '--';
+            document.getElementById('gap').textContent = (safetyAvg && capsAvg) ? Math.round(safetyAvg - capsAvg) : '--';
+        }
+
+        function formatMonths(m) {
+            if (m < 12) return Math.round(m) + 'mo';
+            return (m / 12).toFixed(1) + 'y';
+        }
+
+        function updateChart() {
+            const months = 72; // 6 years
+            const labels = Array.from({ length: months + 1 }, (_, i) => {
+                if (i % 12 === 0) return `${2025 + i / 12}`;
+                return '';
+            });
+
+            const datasets = activeAreas.map(area => ({
+                label: area,
+                data: calculateSpeedupCurve(area, months),
+                borderColor: currentData.areas[area].color,
+                backgroundColor: currentData.areas[area].color + '20',
+                borderWidth: 2,
+                fill: false,
+                tension: 0.3,
+                pointRadius: 0,
+                pointHoverRadius: 4
+            }));
+
+            if (chart) {
+                chart.data.labels = labels;
+                chart.data.datasets = datasets;
+                chart.update('none');
+            } else {
+                const ctx = document.getElementById('speedupChart').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: 'line',
+                    data: { labels, datasets },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#ccc',
+                                    usePointStyle: true,
+                                    padding: 15
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: '#1a1a1a',
+                                titleColor: '#fff',
+                                bodyColor: '#ccc',
+                                borderColor: '#333',
+                                borderWidth: 1,
+                                callbacks: {
+                                    title: (items) => {
+                                        const month = items[0].dataIndex;
+                                        const year = 2025 + month / 12;
+                                        return `${year.toFixed(1)} (${month} months from now)`;
+                                    },
+                                    label: (item) => `${item.dataset.label}: ${item.raw.toFixed(1)}x speedup`
+                                }
+                            },
+                            annotation: {
+                                annotations: {
+                                    line10x: {
+                                        type: 'line',
+                                        yMin: 10,
+                                        yMax: 10,
+                                        borderColor: '#666',
+                                        borderWidth: 1,
+                                        borderDash: [5, 5],
+                                        label: {
+                                            display: true,
+                                            content: '10x speedup',
+                                            position: 'end',
+                                            color: '#888',
+                                            font: { size: 10 }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { color: '#333' },
+                                ticks: { color: '#888' },
+                                title: {
+                                    display: true,
+                                    text: 'Time',
+                                    color: '#888'
+                                }
+                            },
+                            y: {
+                                type: 'logarithmic',
+                                min: 1,
+                                max: 30,
+                                grid: { color: '#333' },
+                                ticks: {
+                                    color: '#888',
+                                    callback: (v) => v + 'x'
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Speedup Factor',
+                                    color: '#888'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function resetToDefaults() {
+            currentData = JSON.parse(JSON.stringify(defaultData));
+            activeAreas = Object.keys(currentData.areas);
+            metrParams = { doublingMonths: 5.5, currentHorizonMins: 60 };
+
+            document.getElementById('doubling-time').value = 5.5;
+            document.getElementById('current-horizon').value = 60;
+
+            // Reset checkboxes
+            Object.keys(currentData.areas).forEach(name => {
+                document.getElementById(`area-${name}`).checked = true;
+            });
+
+            // Reset weight displays and sliders
+            currentData.factors.forEach((factor, i) => {
+                const id = `weight-${factor.replace(/\//g, '-')}`;
+                document.getElementById(id).textContent = currentData.weights[factor];
+                document.querySelectorAll('#weights-container input[type="range"]')[i].value = currentData.weights[factor];
+            });
+
+            updateFactorInputs();
+            updateModel();
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initUI();
+            updateModel();
+
+            // Set chart container height
+            document.querySelector('.chart-container').style.minHeight = '600px';
+        });
+    </script>
+</body>
+</html>

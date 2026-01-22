@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI R&D Automatability Model</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 20px;
+            background: #fafafa;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #f0f0f0;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 13px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 10px;
+            text-align: center;
+            min-width: 80px;
+        }
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+        .category-header {
+            background: #e8e8e8;
+            font-weight: 600;
+        }
+        .factor-name {
+            text-align: left;
+            font-weight: 500;
+            min-width: 200px;
+        }
+        .weight-cell {
+            background: #f9f9f9;
+            font-weight: 500;
+        }
+        .editable {
+            cursor: pointer;
+        }
+        .editable:hover {
+            background: #fffde7;
+        }
+        .result-row td {
+            background: #e3f2fd;
+            font-weight: 600;
+        }
+        .result-row .factor-name {
+            background: #bbdefb;
+        }
+        .category-avg-row td {
+            background: #fff3e0;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .category-avg-row .factor-name {
+            background: #ffe0b2;
+        }
+        .category-divider {
+            border-right: 3px solid #333 !important;
+        }
+        input.cell-input {
+            width: 60px;
+            padding: 4px;
+            font-size: 13px;
+            text-align: center;
+            border: 2px solid #2196f3;
+            border-radius: 2px;
+        }
+        .hint {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI R&D Automatability Model</h1>
+    <p class="hint">Click any value or weight to edit. Results update automatically.</p>
+    <div class="controls">
+        <button onclick="resetToDefaults()">Reset to Default Values</button>
+    </div>
+    <div class="table-container">
+        <table id="model-table">
+            <thead>
+                <tr>
+                    <th>Weight</th>
+                    <th>Factor</th>
+                    <th colspan="5" class="category-header category-divider">Safety Research</th>
+                    <th colspan="5" class="category-header">Capability Research</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Interpretability</th>
+                    <th>Alignment Theory</th>
+                    <th>Scalable Oversight</th>
+                    <th>AI Control</th>
+                    <th class="category-divider">Dangerous Capability Evals</th>
+                    <th>Pre-training Alg. Improvements</th>
+                    <th>Post-training</th>
+                    <th>Data Generation</th>
+                    <th>Agent Scaffolding</th>
+                    <th>Training Efficiency</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const AREAS = [
+            'interpretability', 'alignmentTheory', 'scalableOversight', 'aiControl', 'dangerousCapabilityEvals',
+            'preTraining', 'postTraining', 'dataGeneration', 'agentScaffolding', 'trainingEfficiency'
+        ];
+
+        const FACTORS = [
+            { id: 'taskLength', name: 'Task length', defaultWeight: 1 },
+            { id: 'insightCreativity', name: 'Insight/creativity vs engineering', defaultWeight: 1.5 },
+            { id: 'dataAvailability', name: 'Data availability', defaultWeight: 0.2 },
+            { id: 'feedbackQuality', name: 'Feedback quality/verifiability', defaultWeight: 2.5 },
+            { id: 'computeLabour', name: 'Compute vs labour bottleneck', defaultWeight: 2.5 },
+            { id: 'schemingRisk', name: 'Scheming/Sabotage/Sandbagging', defaultWeight: 0.4 },
+            { id: 'economicIncentive', name: 'Economic incentive for automation', defaultWeight: 0.5 }
+        ];
+
+        const DEFAULT_VALUES = {
+            taskLength: [7.625, 2.125, 4, 6.25, 7.625, 3.125, 5, 6.125, 7.5, 6.125],
+            insightCreativity: [4.5625, 1.5, 5, 6.0625, 7.5625, 6.125, 6.75, 8.8625, 7.5, 6.228125],
+            dataAvailability: [4.875, 3, 2.25, 2, 4.125, 7.75, 7, 6.375, 5.875, 7],
+            feedbackQuality: [3.875, 1.375, 3.875, 4.375, 3.625, 7.5, 7.375, 6, 7.5, 9.125],
+            computeLabour: [7.875, 10, 6.75, 8.125, 7.625, 2.125, 4.375, 3.875, 6.625, 5.25],
+            schemingRisk: [2, 1, 1, 1, 1, 9, 7, 9, 9, 9],
+            economicIncentive: [3.875, 1.875, 4, 4.625, 5.375, 9.375, 9.375, 9, 8.75, 9.125]
+        };
+
+        let weights = {};
+        let values = {};
+
+        function initializeData() {
+            FACTORS.forEach(f => {
+                weights[f.id] = f.defaultWeight;
+                values[f.id] = [...DEFAULT_VALUES[f.id]];
+            });
+        }
+
+        function calculateResults() {
+            const results = [];
+            const totalWeight = FACTORS.reduce((sum, f) => sum + weights[f.id], 0);
+
+            for (let i = 0; i < AREAS.length; i++) {
+                let weightedSum = 0;
+                FACTORS.forEach(f => {
+                    weightedSum += values[f.id][i] * weights[f.id];
+                });
+                results.push(weightedSum / totalWeight);
+            }
+            return results;
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+
+            FACTORS.forEach(factor => {
+                const row = document.createElement('tr');
+
+                const weightCell = document.createElement('td');
+                weightCell.className = 'weight-cell editable';
+                weightCell.textContent = weights[factor.id];
+                weightCell.onclick = () => makeEditable(weightCell, 'weight', factor.id);
+                row.appendChild(weightCell);
+
+                const nameCell = document.createElement('td');
+                nameCell.className = 'factor-name';
+                nameCell.textContent = factor.name;
+                row.appendChild(nameCell);
+
+                values[factor.id].forEach((val, idx) => {
+                    const cell = document.createElement('td');
+                    cell.className = 'editable';
+                    if (idx === 4) cell.classList.add('category-divider');
+                    cell.textContent = formatNumber(val);
+                    cell.onclick = () => makeEditable(cell, 'value', factor.id, idx);
+                    row.appendChild(cell);
+                });
+
+                tbody.appendChild(row);
+            });
+
+            const resultRow = document.createElement('tr');
+            resultRow.className = 'result-row';
+
+            const emptyWeight = document.createElement('td');
+            emptyWeight.textContent = '';
+            resultRow.appendChild(emptyWeight);
+
+            const resultLabel = document.createElement('td');
+            resultLabel.className = 'factor-name';
+            resultLabel.textContent = 'Amenable to speedup from automation';
+            resultRow.appendChild(resultLabel);
+
+            const results = calculateResults();
+            results.forEach((val, idx) => {
+                const cell = document.createElement('td');
+                if (idx === 4) cell.classList.add('category-divider');
+                cell.textContent = formatNumber(val);
+                resultRow.appendChild(cell);
+            });
+
+            tbody.appendChild(resultRow);
+
+            // Category average row
+            const avgRow = document.createElement('tr');
+            avgRow.className = 'category-avg-row';
+
+            const emptyWeight2 = document.createElement('td');
+            emptyWeight2.textContent = '';
+            avgRow.appendChild(emptyWeight2);
+
+            const avgLabel = document.createElement('td');
+            avgLabel.className = 'factor-name';
+            avgLabel.textContent = 'Category Average';
+            avgRow.appendChild(avgLabel);
+
+            const safetyAvg = results.slice(0, 5).reduce((a, b) => a + b, 0) / 5;
+            const capabilityAvg = results.slice(5, 10).reduce((a, b) => a + b, 0) / 5;
+
+            // Safety cells: empty, empty, value, empty, empty (with divider on last)
+            for (let i = 0; i < 5; i++) {
+                const cell = document.createElement('td');
+                if (i === 2) cell.textContent = formatNumber(safetyAvg);
+                if (i === 4) cell.classList.add('category-divider');
+                avgRow.appendChild(cell);
+            }
+            // Capability cells: empty, empty, value, empty, empty
+            for (let i = 0; i < 5; i++) {
+                const cell = document.createElement('td');
+                if (i === 2) cell.textContent = formatNumber(capabilityAvg);
+                avgRow.appendChild(cell);
+            }
+
+            tbody.appendChild(avgRow);
+        }
+
+        function formatNumber(num) {
+            return Number(num.toFixed(2));
+        }
+
+        function makeEditable(cell, type, factorId, areaIdx) {
+            if (cell.querySelector('input')) return;
+
+            const currentValue = type === 'weight' ? weights[factorId] : values[factorId][areaIdx];
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.step = '0.1';
+            input.className = 'cell-input';
+            input.value = currentValue;
+
+            input.onblur = () => {
+                const newValue = parseFloat(input.value);
+                if (!isNaN(newValue) && newValue >= 0) {
+                    if (type === 'weight') {
+                        weights[factorId] = newValue;
+                    } else {
+                        values[factorId][areaIdx] = newValue;
+                    }
+                }
+                renderTable();
+            };
+
+            input.onkeydown = (e) => {
+                if (e.key === 'Enter') {
+                    input.blur();
+                } else if (e.key === 'Escape') {
+                    renderTable();
+                }
+            };
+
+            cell.textContent = '';
+            cell.appendChild(input);
+            input.focus();
+            input.select();
+        }
+
+        function resetToDefaults() {
+            initializeData();
+            renderTable();
+        }
+
+        initializeData();
+        renderTable();
+    </script>
+</body>
+</html>

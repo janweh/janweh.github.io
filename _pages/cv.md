@@ -14,8 +14,11 @@ You can download my full CV [here](/files/CV.pdf).
 Education
 ======
 
+### Frontier Security Researcher @ Institute for AI Policy and Strategy *(May 2026 - present)*
+* Researching cyber risks from advanced AI and safeguards for the use of AI in government
+
 ### Winter Fellow in AI Governance @ Center for the Governance of AI *(Jan. 2026 - Apr. 2026)
-* Conducting research on AI Governance under mentorship of Alan Chan
+* Researching honeypots against AI Agents under mentorship of Alan Chan and Jam Kraprayoon
 
 ### PhD candidate in AI Safety @ CISPA Helmholtz Center for Information Security *(Jun. 2024 - Oct. 2025)*
 * Researching LLM Alignment and Interpretability advised by Prof. Mario Fritz

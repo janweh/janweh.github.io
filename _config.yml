@@ -13,7 +13,7 @@ title                    : "Jan Wehner"
 title_separator          : "-"
 name                     : &name "Jan Wehner"
 description              : &description |
-  PhD Student in AI Safety
+  AI Governance Researcher at the Institute for AI Policy and Strategy (IAPS), working on AI control, AI×Cyber and government use of AI
 url                      : https://janwehner.com # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "janweh/janweh.github.io"

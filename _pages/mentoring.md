@@ -13,7 +13,7 @@ I love mentoring research projects. If you are interested in working with me on 
 
 ## Opportunities to work with me
 
-- **Applications open:** [MATS Winter 2027](https://www.matsprogram.org/apply) — I will co-mentor with Sambhav Maheshwari on threat modelling and control for national-security deployments of AI agents.
+- **Applications closed:** [MATS Winter 2027](https://www.matsprogram.org/) — I will co-mentor with Sambhav Maheshwari on threat modelling and control for national-security deployments of AI agents.
 
 ## Mentored projects
 

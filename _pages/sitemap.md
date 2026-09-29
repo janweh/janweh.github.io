@@ -22,6 +22,7 @@ A list of all the posts and pages found on the site. For you robots out there, t
 {% capture written_label %}'None'{% endcapture %}
 
 {% for collection in site.collections %}
+{% if collection.label == "unlisted" %}{% continue %}{% endif %}
 {% unless collection.output == false or collection.label == "posts" %}
   {% capture label %}{{ collection.label }}{% endcapture %}
   {% if label != written_label %}

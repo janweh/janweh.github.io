@@ -1,25 +1,15 @@
-{% include base_path %}
-
-{% if site.author.github or site.author.bitbucket or site.atom_feed.hide != true %}
-<div class="page__footer-follow">
-  <ul class="social-icons">
-    {% if site.data.ui-text[site.locale].follow_label %}
-      <li><strong>{{ site.data.ui-text[site.locale].follow_label }}</strong></li>
-    {% endif %}
-    {% if site.author.github %}
-      <li><a href="http://github.com/{{ site.author.github }}"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
-    {% endif %}
-    {% if site.author.bitbucket %}
-      <li><a href="http://bitbucket.org/{{ site.author.bitbucket }}"><i class="fab fa-bitbucket" aria-hidden="true"></i> Bitbucket</a></li>
-    {% endif %}
-    {% if site.atom_feed.hide != true %}
-    <li><a href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ base_path }}/feed.xml{% endif %}"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].feed_label | default: "Feed" }}</a></li>
-    {% endif %}
-  </ul>
-</div>
-{% endif %}
-
-<div class="page__footer-copyright">
-  &copy; {{ site.time | date: '%Y' }} {{ site.name | default: site.title }}, {{ site.data.ui-text[site.locale].powered_by | default: "Powered by" }} <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/academicpages/academicpages.github.io">AcademicPages</a>, a fork of <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.<br />
-  Site last updated {{ "now" | date: '%Y-%m-%d' %}}
-</div>
+{% assign author = site.author %}
+<footer class="foot">
+  <div class="wrap">
+    <span>&copy; {{ site.time | date: '%Y' }} {{ site.name | default: site.title }}</span>
+    <span class="foot-links">
+      {% if author.email %}<a href="mailto:{{ author.email }}">Email</a>{% endif %}
+      {% if author.googlescholar %}<a href="{{ author.googlescholar }}" target="_blank" rel="noopener">Google Scholar</a>{% endif %}
+      {% if author.github %}<a href="https://github.com/{{ author.github }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+      {% if author.linkedin %}<a href="https://www.linkedin.com/in/{{ author.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
+      {% if author.twitter %}<a href="https://x.com/{{ author.twitter }}" target="_blank" rel="noopener">X</a>{% endif %}
+      {% unless site.atom_feed.hide %}<a href="{{ site.atom_feed.path | default: '/feed.xml' | relative_url }}">Feed</a>{% endunless %}
+      <a href="{{ '/sitemap/' | relative_url }}">Sitemap</a>
+    </span>
+  </div>
+</footer>

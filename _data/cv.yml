@@ -1,0 +1,68 @@
+# Content of the CV page (/cv/), rendered by _layouts/cv.html.
+# The publication list at the end of that page comes from _publications.
+
+- heading: "Positions & Education"
+  entries:
+    - role: "Frontier Security Researcher"
+      org: "Institute for AI Policy and Strategy"
+      when: "May 2026 – present"
+      points:
+        - "Researching cyber risks from advanced AI and safeguards for the use of AI in government"
+    - role: "Winter Fellow in AI Governance"
+      org: "Centre for the Governance of AI"
+      when: "Jan 2026 – Apr 2026"
+      points:
+        - "Researching honeypots against AI Agents under mentorship of Alan Chan and Jam Kraprayoon"
+    - role: "PhD candidate in AI Safety"
+      org: "CISPA Helmholtz Center for Information Security"
+      when: "Jun 2024 – Oct 2025"
+      points:
+        - "Researching LLM Alignment and Interpretability advised by Prof. Mario Fritz"
+        - "Coadvised by Prof. David Krueger at MILA as part of the ELLIS PhD program"
+    - role: "MSc Computer Science – AI Technology Track"
+      org: "Delft University of Technology"
+      when: "Sep 2021 – Nov 2023"
+      points:
+        - "Thesis: Counterfactual Explanations of Learned Reward Functions"
+        - "Grade: 8.5/10"
+    - role: "BSc Business Informatics"
+      org: "Otto-Friedrich-University Bamberg"
+      when: "Apr 2017 – May 2021"
+      points:
+        - "Thesis: Efficient inference of qualitative temporal information for robust planning"
+        - "Grade: 1.2 (cum laude)"
+
+- heading: "Research experience"
+  entries:
+    - role: "Participant"
+      org: "AI Safety Camp"
+      when: "Jan 2024 – May 2024"
+      points:
+        - "Conducted and published research to characterize and prevent harmful fine-tuning attacks"
+    - role: "Research Fellow"
+      org: "Swiss Existential Risk Initiative"
+      when: "Jul 2022 – Aug 2022"
+      points:
+        - "Employed interdisciplinary thinking to identify data requirements for Inverse Reinforcement Learning to learn human values"
+        - "Experimentally validated theoretical shortcomings and technical challenges for Reward Learning"
+    - role: "Research Assistant"
+      org: "Otto-Friedrich-University Bamberg"
+      when: "Jun 2021 – Aug 2021"
+      points:
+        - "Conducted empirical research on knowledge representation in temporal domains"
+
+- heading: "Teaching & Organising"
+  entries:
+    - role: "Founder"
+      org: "Delft AI Safety Initiative"
+      when: "Nov 2022 – Dec 2023"
+      points:
+        - "Devised strategy and structure for a new student organisation focused on addressing risks from AI"
+        - "Delivered courses and regular events on AI Alignment to >50 students"
+        - "Presented introductory talks about research in AI Safety"
+    - role: "Teaching Assistant – Algorithms and Data Structures"
+      org: "Otto-Friedrich-University Bamberg"
+      when: "2019 & 2021"
+      points:
+        - "Held weekly classes and discussions explaining key concepts in Computer Science"
+        - "Graded assignments and provided feedback"

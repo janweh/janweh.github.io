@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<p class="eyebrow">Research mentoring</p>
+<h1 class="page-title">{{ page.title }}</h1>
+<div class="lede">{{ content }}</div>
+
+<h2 class="section-title">Opportunities to work with me</h2>
+{% for opp in page.opportunities %}
+  <div class="opp">
+    <div class="item-meta"><span class="badge">{{ opp.status }}</span></div>
+    <h3 class="item-title"><a href="{{ opp.url }}" target="_blank" rel="noopener">{{ opp.program }}</a></h3>
+    <p class="item-summary">{{ opp.text }}</p>
+  </div>
+{% endfor %}
+
+<h2 class="section-title">Mentored projects</h2>
+{% for project in page.projects %}
+  <article class="item proj">
+    {% if project.program %}<div class="item-meta"><span class="badge">{{ project.program }}</span></div>{% endif %}
+    <h3 class="item-title">{% if project.url %}<a href="{{ project.url }}" target="_blank" rel="noopener">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}</h3>
+    <p class="item-authors">{{ project.who }}</p>
+  </article>
+{% endfor %}

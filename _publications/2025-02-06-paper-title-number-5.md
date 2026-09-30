@@ -1,77 +1,34 @@
 ---
-title: "Safety is Essential for Responsible Open-Ended Systems"
+title: "Position: Safety Must Precede the Deployment of Open-Ended AI Agents"
 type: "publication"
 category: journal
 permalink: /publication/safety_is_essential
-excerpt: |
-    Ivaxi Sheth, **Jan Wehner**, Sahar Abdelnabi, Ruta Binkyte, Mario Fritz forthcoming in _SSI-FM ICLR 2025 Workshop_, 2025
-
-    Open-ended AI is a growing paradigm where AI continuously explores novel and interesting artifacts. This position paper describes specific safety challenges in Open-Ended AI and how they can be mitigated.
-
-    [[Article]](https://arxiv.org/abs/2502.04512) [[PDF]](/files/safety_is_essential_in_open_ended_ai.pdf)
+venue: "ICML 2026"
+hide_year: true   # the venue already names a year
+authors: "Ivaxi Sheth, **Jan Wehner**, Sahar Abdelnabi, Ruta Binkyte, Mario Fritz"
+excerpt: "Open-ended AI is a growing paradigm where AI continuously explores novel and interesting artifacts. This position paper describes specific safety challenges in Open-Ended AI and how they can be mitigated."
+links:
+  - label: "Article"
+    url: "https://openreview.net/forum?id=DMZAZYgFaw"
+  - label: "arXiv"
+    url: "https://arxiv.org/abs/2502.04512"
 ---
 
-AI advancements have been significantly driven by a combination of foundation models and curiosity-driven learning aimed at increasing capability and adaptability. A growing area of interest within this field is Open-Endedness - the ability of AI systems to continuously and autonomously generate novel and diverse artifacts or solutions. This has become relevant for accelerating scientific discovery and enabling continual adaptation in AI agents. This position paper argues that the inherently dynamic and self-propagating nature of Open-Ended AI introduces significant, underexplored risks, including challenges in maintaining alignment, predictability, and control. This paper systematically examines these challenges, proposes mitigation strategies, and calls for action for different stakeholders to support the safe, responsible and successful development of Open-Ended AI. 
-
-[Article](https://arxiv.org/abs/2502.04512){:target="_blank"}   [Download PDF](/files/safety_is_essential_in_open_ended_ai.pdf){:target="_blank"}
+AI advancements have been significantly driven by a combination of foundation models and curiosity-driven learning aimed at increasing capability and adaptability. Within this landscape, open-endedness, where AI agents autonomously and indefinitely generate novel behaviors, representations, or solutions, has gained increasing interest. This has become relevant in the context of self-evolving agents and long-horizon discovery. This position paper argues that the defining properties of open-ended AI systems introduce a distinct and underexplored class of safety challenges, including loss of predictability, emergent misalignment, and difficulties in maintaining effective control as systems evolve beyond their initial design assumptions, that must be addressed preemptively. These challenges differ qualitatively from those associated with task-bounded or static models and are unlikely to be addressed by existing safety frameworks alone, which is why these risks must be examined proactively, before large-scale deployment. The paper proposes a taxonomy for key challenges, discusses research opportunities, and calls for coordinated action to support the safe and responsible development of open-ended AI.
 
 Citation:
 
 <div class="citation-container" markdown="0">
   <button class="copy-button" onclick="copyBibTeX()">Copy BibTeX</button>
-  <pre><code class="bibtex" id="bibtex">@article{sheth2025safety,
-  title={Safety is Essential for Responsible Open-Ended Systems},
+  <pre><code class="bibtex" id="bibtex">@inproceedings{sheth2026position,
+  title={Position: Safety Must Precede the Deployment of Open-Ended {AI} Agents},
   author={Sheth, Ivaxi and Wehner, Jan and Abdelnabi, Sahar and Binkyte, Ruta and Fritz, Mario},
-  journal={arXiv preprint arXiv:2502.04512},
-  year={2025}
+  booktitle={Forty-third International Conference on Machine Learning Position Paper Track},
+  year={2026},
+  url={https://openreview.net/forum?id=DMZAZYgFaw}
 }
 </code></pre>
 </div>
-
-<style>
-.citation-container {
-  position: relative;
-  margin: 1em 0;
-}
-
-.copy-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  padding: 5px 10px;
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9em;
-  transition: all 0.2s ease;
-}
-
-.copy-button:hover {
-  background-color: #e9ecef;
-}
-
-.bibtex {
-  background-color: #f8f9fa;
-  padding: 15px;
-  border-radius: 4px;
-  border: 1px solid #dee2e6;
-  margin: 0;
-  white-space: pre-wrap;
-  line-height: 1.5;
-  font-family: monospace;
-}
-
-pre {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  margin: 0;
-}
-
-code {
-  display: block;
-}
-</style>
 
 <script>
 function copyBibTeX() {

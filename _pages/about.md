@@ -1,5 +1,7 @@
 ---
+layout: home
 permalink: /
+tagline: "Technical governance to reduce risk from AI"
 author_profile: true
 redirect_from: 
   - /about/

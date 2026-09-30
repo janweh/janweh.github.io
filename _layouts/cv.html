@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+<p class="eyebrow">Curriculum vitae</p>
+<div class="title-row">
+  <h1 class="page-title">{{ page.title }}</h1>
+  {% assign pdf = '/files/CV.pdf' | relative_url %}
+  {% include btn.html label="Download PDF" url=pdf class="small" external=true %}
+</div>
+
+{% for section in site.data.cv %}
+  <h2 class="section-title">{{ section.heading }}</h2>
+  {% for entry in section.entries %}
+    <article class="cv-item">
+      <div class="cv-when">{{ entry.when }}</div>
+      <div class="cv-body">
+        <h3 class="cv-role">{{ entry.role }}</h3>
+        <p class="cv-org">{{ entry.org }}</p>
+        <ul>{% for point in entry.points %}<li>{{ point }}</li>{% endfor %}</ul>
+      </div>
+    </article>
+  {% endfor %}
+{% endfor %}
+
+<h2 class="section-title">Publications</h2>
+{% assign pubs = site.publications | sort: "date" | reverse %}
+<ul class="cv-pubs">
+  {% for post in pubs %}
+    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a><br><span>{{ post.venue }}{% unless post.hide_year %}, {{ post.date | date: "%Y" }}{% endunless %}</span></li>
+  {% endfor %}
+</ul>

@@ -3,34 +3,24 @@ layout: archive
 title: "Publications"
 permalink: /publications/
 author_profile: true
+custom_header: true
 ---
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
+{% assign pubs = site.publications | sort: "date" | reverse %}
+{% assign newest = pubs | first %}
+{% assign oldest = pubs | last %}
+<p class="eyebrow">{{ pubs.size }} papers &middot; {{ oldest.date | date: "%Y" }}&ndash;{{ newest.date | date: "%Y" }}</p>
+<div class="title-row">
+<h1 class="page-title">{{ page.title }}</h1>
+{% if site.author.googlescholar %}{% include btn.html label="Google Scholar" url=site.author.googlescholar class="ghost small" external=true %}{% endif %}
+</div>
 
-{% include base_path %}
-
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single.html %}
-    {% endfor %}
-  {% endfor %}
-{% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% endif %}
-
-
-
+{% assign groups = pubs | group_by_exp: "post", "post.date | date: '%Y'" %}
+{% for group in groups %}
+<section class="group">
+<h2 class="year">{{ group.name }}</h2>
+<div class="group-items">
+{% for post in group.items %}{% include archive-single.html %}{% endfor %}
+</div>
+</section>
+{% endfor %}

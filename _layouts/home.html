@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+<p class="eyebrow">About</p>
+<h1 class="page-title">{{ page.tagline }}</h1>
+<div class="prose">{{ content }}</div>
+<div class="actions">
+  {% capture mailto %}mailto:{{ site.author.email }}{% endcapture %}
+  {% include btn.html label="Get in touch" url=mailto %}
+  {% assign cv = '/files/CV.pdf' | relative_url %}
+  {% include btn.html label="Download CV" url=cv class="ghost" external=true %}
+</div>
+
+<section class="block">
+  <div class="block-head">
+    <h2 class="section-title">Recent publications</h2>
+    {% assign all = '/publications/' | relative_url %}
+    {% include btn.html label="All publications" url=all class="ghost small" %}
+  </div>
+  {% assign pubs = site.publications | sort: "date" | reverse %}
+  {% for post in pubs limit: 3 %}{% include archive-single.html %}{% endfor %}
+</section>
+
+<section class="block">
+  <div class="block-head">
+    <h2 class="section-title">Recent writing</h2>
+    {% assign all = '/posts/' | relative_url %}
+    {% include btn.html label="All posts" url=all class="ghost small" %}
+  </div>
+  {% for post in site.posts limit: 3 %}{% include archive-single.html %}{% endfor %}
+</section>

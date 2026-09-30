@@ -23,7 +23,8 @@ repository               : "janweh/janweh.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "face-small.jpg"
+  avatar           : "face-small.jpg"   # fallback / sharing image; the sidebar uses images/avatar-<width>.jpg
+  avatar_widths    : [96, 168, 252, 336, 504]
   name             : "Jan Wehner"
   pronouns         : # example: "she/her"  
   bio              : "AI Policy Researcher"

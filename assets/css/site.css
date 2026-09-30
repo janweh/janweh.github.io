@@ -80,7 +80,11 @@ main { min-width: 0; max-width: 720px; }
   width: 168px; margin: 17px; border-radius: 58% 42% 47% 53% / 46% 51% 49% 54%;
   box-shadow: 0 0 0 7px var(--bg), 0 0 0 8px rgb(var(--accent-rgb) / .5), 0 0 0 16px var(--bg), 0 0 0 17px rgb(var(--accent-rgb) / .24);
 }
-.avatar img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 30%; border-radius: inherit; }
+.avatar img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: inherit; }
+/* a paper-coloured stroke over the rim of the photo: strokes are anti-aliased, the
+   rounded clip of an image is not always, which left the edge looking jagged */
+.avatar { position: relative; }
+.avatar::after { content: ''; position: absolute; inset: -1px; border: 2.5px solid var(--bg); border-radius: inherit; pointer-events: none; }
 .name { margin-top: 36px; font: 600 25px/1.2 var(--font-head); letter-spacing: -.01em; }
 .role { margin-top: 5px; color: var(--muted); font: 400 15px/1.45 var(--font-meta); }
 .links { margin-top: 18px; display: grid; gap: 1px; }

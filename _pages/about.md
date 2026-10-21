@@ -12,6 +12,4 @@ Hello, I'm Jan Wehner. I'm a researcher on the Frontier Security Team at the [In
 
 Previously, I was a Winter Fellow at [GovAI](https://www.governance.ai/) under [Alan Chan](https://www.achan.ca/), and I researched AI Safety and Interpretability at the [CISPA Helmholtz Center for Information Security](https://cispa.de/en), supervised by [Prof. Mario Fritz](https://cispa.de/en/people/mario.fritz) and [Prof. David Krueger](https://davidscottkrueger.com/). My past work spans [Representation Engineering](/publication/representation_engineering), [harmful fine-tuning attacks](/publication/representation_noising) and [Inverse Reinforcement Learning](/publication/explaining_learned_reward_functions). During my MSc I also founded the [Delft AI Safety Initiative](https://www.delftaisafety.org/).
 
-I love mentoring research projects — see my [mentoring page](/mentoring/) for past projects and opportunities to work with me.
-
 Please don't hesitate to reach out to me at [jan(at)iaps.ai](mailto:jan@iaps.ai)!
